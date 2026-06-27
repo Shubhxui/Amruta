@@ -23,8 +23,8 @@ import Icon from "./Icon.astro";
           <summary class="faq__q">
             <span>{item.q}</span>
             <span class="faq__toggle" aria-hidden="true">
-              <Icon name="plus" class="w-5 h-5 faq__plus" strokeWidth={2} />
-              <Icon name="minus" class="w-5 h-5 faq__minus" strokeWidth={2} />
+              <span class="faq__plus"><Icon name="plus" class="w-5 h-5" strokeWidth={2} /></span>
+              <span class="faq__minus"><Icon name="minus" class="w-5 h-5" strokeWidth={2} /></span>
             </span>
           </summary>
           <div class="faq__a"><p>{item.a}</p></div>
@@ -62,9 +62,10 @@ import Icon from "./Icon.astro";
     transition: background 0.2s;
   }
   .faq__item[open] .faq__toggle { background: var(--color-accent); }
+  .faq__plus, .faq__minus { display: inline-flex; align-items: center; justify-content: center; }
   .faq__minus { display: none; }
   .faq__item[open] .faq__plus { display: none; }
-  .faq__item[open] .faq__minus { display: block; }
+  .faq__item[open] .faq__minus { display: inline-flex; }
   .faq__a {
     overflow: hidden; color: var(--color-ink-soft); line-height: 1.65;
     font-size: 0.95rem; padding-bottom: 1.1rem; padding-right: 2.5rem;
