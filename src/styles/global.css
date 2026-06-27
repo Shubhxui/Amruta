@@ -23,9 +23,9 @@
   --color-dark-soft: #181818;
   --color-dark-line: #2a2a2a;
 
-  /* Single accent — lime */
-  --color-accent: #e4ff60;
-  --color-accent-deep: #d4f23f;
+  /* Single accent — dusty rose / clay (calm, maternity-appropriate) */
+  --color-accent: #d9b1a3;
+  --color-accent-deep: #cb9c8c;
 
   /* Radii */
   --radius-md: 0.85rem;
