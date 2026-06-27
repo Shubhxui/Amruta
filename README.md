@@ -31,27 +31,28 @@ Custom SVG **lotus** wordmark (new life · purity · nurturing) — see
 [`src/components/Logo.astro`](src/components/Logo.astro). A `variant="light"` is used
 on dark backgrounds. Favicon: [`public/favicon.svg`](public/favicon.svg).
 
-### Colours
+### Colours — minimal, calm (3 neutrals + 1 accent)
 | Role | Token | Hex |
 |------|-------|-----|
-| Brand (dusty rose) | `brand-500` | `#bf5c66` |
-| Secondary (deep sage) | `sage-500` | `#4f7461` |
-| Accent (warm peach) | `peach-500` | `#e0a36a` |
-| Surface (cream) | `cream-100` | `#fbf7f3` |
-| Ink (text) | `ink` | `#2c2426` |
+| Page base (warm near-white) | `paper` | `#faf9f5` |
+| Cream panels (hero, alt sections) | `cream` | `#ece8dd` |
+| Ink (near-black text/headings) | `ink` | `#0e0e0e` |
+| Grey (secondary text) | `ink-soft` | `#6e6e6e` |
+| Dark sections | `dark` | `#0e0e0e` |
+| **Accent (lime)** | `accent` | `#e4ff60` |
 
-Each colour has a full 50–900 scale. Use them as normal Tailwind utilities,
-e.g. `bg-brand-500`, `text-sage-600`, `border-cream-300`.
+The accent is used sparingly (buttons, badges, the footer wordmark). Rich
+photography carries the colour — the UI stays neutral and calm, à la the reference.
 
 ### Typography
-- **Display / headings:** Fraunces (soft modern serif) — `font-display`
-- **Body / UI:** Plus Jakarta Sans — `font-sans`
-
-Loaded via Google Fonts in [`src/layouts/Layout.astro`](src/layouts/Layout.astro).
+- **One typeface:** **Switzer** (a free Helvetica-Now-style grotesque from Fontshare),
+  weights 400/500/600/700 — headings and body alike. Loaded in
+  [`src/layouts/Layout.astro`](src/layouts/Layout.astro).
 
 ### Reusable bits
-`.btn` + `.btn-primary` / `.btn-secondary` / `.btn-outline`, `.card` / `.card-hover`,
-`.eyebrow`, `.container-page`, and a `.reveal` scroll-in animation.
+Buttons `.btn` + `.btn-primary` (lime) / `.btn-dark` / `.btn-white` / `.btn-outline`,
+`.card` / `.card-hover`, `.eyebrow`, `.h-display` / `.h-section` / `.lead`,
+`.container-page`, and a `.reveal` scroll-in animation.
 
 ---
 

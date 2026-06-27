@@ -6,9 +6,9 @@ import Icon from "./Icon.astro";
 <section id="services" class="services">
   <div class="container-page">
     <div class="section-head reveal">
-      <span class="eyebrow is-centered"><Icon name="sparkle" class="w-4 h-4" /> What we offer</span>
-      <h2 class="section-title">Complete care for mother & baby</h2>
-      <p class="section-sub">
+      <span class="eyebrow">What we offer</span>
+      <h2 class="section-title h-section">Complete care for mother &amp; baby</h2>
+      <p class="section-sub lead">
         From planning a pregnancy to your newborn's first check-up, every service
         is delivered with expertise and a gentle, personal touch.
       </p>
@@ -16,14 +16,12 @@ import Icon from "./Icon.astro";
 
     <div class="services__grid">
       {site.services.map((service, i) => (
-        <article class="card card-hover services__card reveal" data-delay={i * 70}>
-          <span class="services__icon">
-            <Icon name={service.icon} class="w-7 h-7" />
-          </span>
+        <article class="card card-hover services__card reveal" data-delay={i * 60}>
+          <span class="services__icon"><Icon name={service.icon} class="w-6 h-6" /></span>
           <h3 class="services__card-title">{service.title}</h3>
           <p class="services__card-text">{service.text}</p>
-          <a href="#contact" class="services__link">
-            Enquire now <Icon name="arrowRight" class="w-4 h-4" />
+          <a href="#contact" class="services__link" aria-label={`Enquire about ${service.title}`}>
+            Enquire <Icon name="arrowUpRight" class="w-4 h-4" />
           </a>
         </article>
       ))}
@@ -32,74 +30,38 @@ import Icon from "./Icon.astro";
 </section>
 
 <style>
-  .services {
-    padding-block: 5rem;
-    background:
-      radial-gradient(70% 60% at 50% 0%, var(--color-cream-50), transparent 70%),
-      var(--color-cream-100);
-  }
+  .services { padding-block: clamp(4rem, 8vw, 6.5rem); background: var(--color-paper); }
 
-  .section-head {
-    max-width: 40rem;
-    margin: 0 auto 3rem;
-    text-align: center;
-  }
-  .section-title {
-    font-size: clamp(2rem, 4.4vw, 2.95rem);
-    margin-top: 1rem;
-  }
-  .section-sub {
-    margin-top: 1rem;
-    color: var(--color-ink-soft);
-    line-height: 1.7;
-  }
-  .eyebrow.is-centered { justify-content: center; }
+  .section-head { max-width: 42rem; margin: 0 auto clamp(2.5rem, 5vw, 3.5rem); text-align: center; }
+  .section-head .eyebrow { justify-content: center; }
+  .section-title { margin-top: 1rem; }
+  .section-sub { margin-top: 1rem; }
 
   .services__grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.1rem;
   }
-  .services__card { padding: 2rem 1.85rem; }
+  .services__card { padding: 1.9rem; display: flex; flex-direction: column; }
   .services__icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px; height: 60px;
-    border-radius: 18px;
-    background: linear-gradient(140deg, var(--color-brand-100), var(--color-peach-200));
-    color: var(--color-brand-600);
-    margin-bottom: 1.4rem;
-    transition: background 0.3s, color 0.3s;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 54px; height: 54px; border-radius: 999px;
+    background: var(--color-cream); color: var(--color-ink);
+    margin-bottom: 1.3rem;
+    transition: background 0.25s, color 0.25s;
   }
-  .services__card:hover .services__icon {
-    background: var(--color-brand-500);
-    color: #fff;
-  }
-  .services__card-title { font-size: 1.3rem; }
-  .services__card-text {
-    margin-top: 0.7rem;
-    color: var(--color-ink-soft);
-    line-height: 1.65;
-    font-size: 0.96rem;
-  }
+  .services__card:hover .services__icon { background: var(--color-accent); }
+  .services__card-title { font-size: 1.25rem; font-weight: 600; }
+  .services__card-text { margin-top: 0.6rem; color: var(--color-ink-soft); line-height: 1.6; font-size: 0.95rem; flex: 1; }
   .services__link {
     margin-top: 1.4rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: var(--color-brand-600);
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    font-weight: 500; font-size: 0.9rem; color: var(--color-ink);
     text-decoration: none;
   }
   .services__link svg { transition: transform 0.2s; }
-  .services__link:hover svg { transform: translateX(4px); }
+  .services__card:hover .services__link svg { transform: translate(3px, -3px); }
 
-  @media (min-width: 640px) {
-    .services__grid { grid-template-columns: 1fr 1fr; }
-  }
-  @media (min-width: 1024px) {
-    .services__grid { grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
-  }
+  @media (min-width: 640px) { .services__grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1000px) { .services__grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; } }
 </style>

@@ -1,35 +1,47 @@
 ---
 import { site } from "../data/site";
 import Icon from "./Icon.astro";
+import { asset } from "../lib/asset";
+
+const avatars = ["images/testimonial-1.jpg", "images/testimonial-2.jpg", "images/testimonial-3.jpg"];
 ---
 
 <section id="testimonials" class="tms">
   <div class="container-page">
     <div class="section-head reveal">
-      <span class="eyebrow is-centered"><Icon name="heart" class="w-4 h-4" /> Happy parents</span>
-      <h2 class="section-title">Stories from families we've cared for</h2>
-      <p class="section-sub">
-        Nothing means more to us than the trust of the mothers and families who
-        chose Amruta for their most precious moments.
-      </p>
+      <span class="eyebrow">Stories from our families</span>
+      <h2 class="section-title h-section">Loved &amp; trusted by Pune parents</h2>
+    </div>
+
+    <!-- credibility / validation strip -->
+    <div class="tms__rating reveal" data-delay="80">
+      <div class="tms__rating-score">
+        <span class="tms__rating-num">4.9</span>
+        <span class="tms__stars" aria-label="4.9 out of 5">
+          <Icon name="star" class="w-[18px] h-[18px]" /><Icon name="star" class="w-[18px] h-[18px]" />
+          <Icon name="star" class="w-[18px] h-[18px]" /><Icon name="star" class="w-[18px] h-[18px]" />
+          <Icon name="star" class="w-[18px] h-[18px]" />
+        </span>
+      </div>
+      <p class="tms__rating-text">Rated by <strong>1,200+ verified families</strong> across Google &amp; Practo</p>
+      <span class="tms__rating-badge"><Icon name="shield" class="w-4 h-4" /> Verified reviews</span>
     </div>
 
     <div class="tms__grid">
       {site.testimonials.map((t, i) => (
         <figure class="tms__card reveal" data-delay={i * 80}>
-          <span class="tms__quote"><Icon name="quote" class="w-8 h-8" /></span>
-          <div class="tms__stars" aria-label="5 out of 5 stars">
-            <Icon name="star" class="w-4 h-4" /><Icon name="star" class="w-4 h-4" />
-            <Icon name="star" class="w-4 h-4" /><Icon name="star" class="w-4 h-4" />
-            <Icon name="star" class="w-4 h-4" />
-          </div>
-          <blockquote class="tms__text">{t.quote}</blockquote>
-          <figcaption class="tms__author">
-            <span class="tms__avatar" aria-hidden="true">{t.name.charAt(0)}</span>
-            <span>
-              <strong>{t.name}</strong>
-              <small>{t.detail}</small>
+          <div class="tms__card-top">
+            <span class="tms__stars" aria-label="5 out of 5">
+              <Icon name="star" class="w-4 h-4" /><Icon name="star" class="w-4 h-4" />
+              <Icon name="star" class="w-4 h-4" /><Icon name="star" class="w-4 h-4" />
+              <Icon name="star" class="w-4 h-4" />
             </span>
+            <span class="tms__verified"><Icon name="check" class="w-[14px] h-[14px]" strokeWidth={2.6} /> Verified patient</span>
+          </div>
+          <blockquote class="tms__text">“{t.quote}”</blockquote>
+          <figcaption class="tms__author">
+            <img class="tms__avatar" src={asset(avatars[i % avatars.length])} alt="" width="48" height="48" loading="lazy" />
+            <span><strong>{t.name}</strong><small>{t.detail}</small></span>
           </figcaption>
         </figure>
       ))}
@@ -38,60 +50,53 @@ import Icon from "./Icon.astro";
 </section>
 
 <style>
-  .tms {
-    padding-block: 5rem;
-    background:
-      radial-gradient(70% 60% at 50% 0%, var(--color-brand-50), transparent 70%),
-      var(--color-cream-100);
+  .tms { padding-block: clamp(4rem, 8vw, 6.5rem); background: var(--color-paper); }
+  .section-head { max-width: 40rem; margin: 0 auto 1.5rem; text-align: center; }
+  .section-head .eyebrow { justify-content: center; }
+  .section-title { margin-top: 1rem; }
+
+  .tms__rating {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+    gap: 0.85rem 1.4rem;
+    margin: 0 auto clamp(2.5rem, 5vw, 3.5rem);
+    padding: 1rem 1.5rem;
+    width: fit-content; max-width: 100%;
+    background: var(--color-cream); border-radius: 999px;
   }
-  .tms__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+  .tms__rating-score { display: inline-flex; align-items: center; gap: 0.6rem; }
+  .tms__rating-num { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; }
+  .tms__rating-text { font-size: 0.92rem; color: var(--color-ink-soft); }
+  .tms__rating-text strong { color: var(--color-ink); font-weight: 600; }
+  .tms__rating-badge {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.8rem; font-weight: 500; color: var(--color-ink);
+    background: #fff; border: 1px solid var(--color-line);
+    padding: 0.4rem 0.85rem; border-radius: 999px;
   }
+
+  .tms__stars { display: inline-flex; gap: 1px; color: var(--color-ink); }
+
+  .tms__grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
   .tms__card {
-    position: relative;
-    background: #fff;
-    border: 1px solid var(--color-cream-300);
-    border-radius: var(--radius-2xl);
-    padding: 2.5rem 1.85rem 1.85rem;
-    box-shadow: 0 1px 2px rgba(44, 36, 38, 0.04);
+    background: #fff; border: 1px solid var(--color-line);
+    border-radius: var(--radius-xl); padding: 1.75rem;
+    display: flex; flex-direction: column;
   }
-  .tms__quote {
-    position: absolute;
-    top: 1.4rem;
-    right: 1.6rem;
-    color: var(--color-brand-100);
+  .tms__card-top { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+  .tms__verified {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    font-size: 0.74rem; font-weight: 500; color: var(--color-ink);
+    background: var(--color-accent); padding: 0.3rem 0.6rem; border-radius: 999px;
   }
-  .tms__stars { display: flex; gap: 2px; color: var(--color-peach-500); }
-  .tms__text {
-    margin-top: 1rem;
-    color: var(--color-ink);
-    line-height: 1.7;
-    font-size: 1.02rem;
-  }
+  .tms__text { margin-top: 1.1rem; color: var(--color-ink); line-height: 1.6; font-size: 1rem; flex: 1; }
   .tms__author {
-    margin-top: 1.6rem;
-    padding-top: 1.4rem;
-    border-top: 1px solid var(--color-cream-200);
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
+    margin-top: 1.5rem; padding-top: 1.25rem;
+    border-top: 1px solid var(--color-line);
+    display: flex; align-items: center; gap: 0.8rem;
   }
-  .tms__avatar {
-    flex: none;
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 46px; height: 46px; border-radius: 50%;
-    background: linear-gradient(140deg, var(--color-brand-300), var(--color-brand-600));
-    color: #fff;
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 1.2rem;
-  }
-  .tms__author strong { display: block; }
+  .tms__avatar { width: 48px; height: 48px; border-radius: 999px; object-fit: cover; flex: none; }
+  .tms__author strong { display: block; font-weight: 600; font-size: 0.95rem; }
   .tms__author small { color: var(--color-ink-soft); font-size: 0.82rem; }
 
-  @media (min-width: 768px) {
-    .tms__grid { grid-template-columns: repeat(3, 1fr); }
-  }
+  @media (min-width: 768px) { .tms__grid { grid-template-columns: repeat(3, 1fr); } }
 </style>

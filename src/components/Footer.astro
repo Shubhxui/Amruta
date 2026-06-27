@@ -13,7 +13,7 @@ const addr = site.contact.address;
       <div class="footer__brand">
         <Logo variant="light" />
         <p class="footer__about">
-          A warm, modern maternity & women's health hospital in Tathawade, Pune —
+          A warm, modern maternity &amp; women's health hospital in Tathawade, Pune —
           caring for mothers and newborns with expertise and heart, 24×7.
         </p>
         <div class="footer__social">
@@ -26,33 +26,20 @@ const addr = site.contact.address;
 
       <div class="footer__col">
         <h4>Explore</h4>
-        <ul>
-          {site.nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
-        </ul>
+        <ul>{site.nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}</ul>
       </div>
 
       <div class="footer__col">
         <h4>Services</h4>
-        <ul>
-          {site.services.slice(0, 6).map((s) => <li><a href="#services">{s.title}</a></li>)}
-        </ul>
+        <ul>{site.services.slice(0, 6).map((s) => <li><a href="#services">{s.title}</a></li>)}</ul>
       </div>
 
       <div class="footer__col footer__col--contact">
         <h4>Get in touch</h4>
         <ul class="footer__contact">
-          <li>
-            <Icon name="location" class="w-[18px] h-[18px]" />
-            <span>{addr.line1}, {addr.line2}, {addr.city} {addr.pin}</span>
-          </li>
-          <li>
-            <Icon name="phone" class="w-[18px] h-[18px]" />
-            <a href={site.contact.phoneHref}>{site.contact.phone}</a>
-          </li>
-          <li>
-            <Icon name="mail" class="w-[18px] h-[18px]" />
-            <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
-          </li>
+          <li><Icon name="location" class="w-[18px] h-[18px]" /><span>{addr.line1}, {addr.line2}, {addr.city} {addr.pin}</span></li>
+          <li><Icon name="phone" class="w-[18px] h-[18px]" /><a href={site.contact.phoneHref}>{site.contact.phone}</a></li>
+          <li><Icon name="mail" class="w-[18px] h-[18px]" /><a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></li>
         </ul>
         <a href="#contact" class="btn btn-primary footer__cta">Book Appointment</a>
       </div>
@@ -60,71 +47,57 @@ const addr = site.contact.address;
 
     <div class="footer__bottom">
       <p>© {year} {site.name}. All rights reserved.</p>
-      <div class="footer__legal">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-      </div>
+      <div class="footer__legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
     </div>
   </div>
+
+  <div class="footer__big" aria-hidden="true">Amruta</div>
 </footer>
 
 <style>
-  .footer {
-    background: linear-gradient(180deg, var(--color-ink), #1d181a);
-    color: rgba(255, 255, 255, 0.74);
-    padding-block: 4rem 1.75rem;
-  }
+  .footer { background: var(--color-dark); color: rgba(255,255,255,0.66); padding-top: clamp(3rem, 6vw, 4.5rem); overflow: hidden; }
   .footer__top {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-    padding-bottom: 3rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: grid; grid-template-columns: 1fr; gap: 2.5rem;
+    padding-bottom: 3rem; border-bottom: 1px solid var(--color-dark-line);
   }
-  .footer__about { margin-top: 1.2rem; line-height: 1.7; font-size: 0.92rem; max-width: 26rem; }
-  .footer__social { margin-top: 1.5rem; display: flex; gap: 0.7rem; }
+  .footer__about { margin-top: 1.2rem; line-height: 1.65; font-size: 0.92rem; max-width: 26rem; }
+  .footer__social { margin-top: 1.5rem; display: flex; gap: 0.6rem; }
   .footer__social a {
     display: inline-flex; align-items: center; justify-content: center;
-    width: 42px; height: 42px; border-radius: 12px;
-    background: rgba(255, 255, 255, 0.08);
-    color: #fff;
-    transition: background 0.2s, transform 0.2s;
+    width: 42px; height: 42px; border-radius: 999px;
+    background: rgba(255,255,255,0.07); color: #fff;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
   }
-  .footer__social a:hover { background: var(--color-brand-500); transform: translateY(-3px); }
+  .footer__social a:hover { background: var(--color-accent); color: var(--color-ink); transform: translateY(-3px); }
 
-  .footer__col h4 {
-    color: #fff;
-    font-family: var(--font-sans);
-    font-weight: 600;
-    font-size: 0.95rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    margin-bottom: 1.1rem;
-  }
+  .footer__col h4 { color: #fff; font-weight: 600; font-size: 0.95rem; margin-bottom: 1.1rem; }
   .footer__col ul { display: flex; flex-direction: column; gap: 0.7rem; }
-  .footer__col a { color: rgba(255, 255, 255, 0.72); text-decoration: none; font-size: 0.92rem; transition: color 0.2s; }
-  .footer__col a:hover { color: var(--color-peach-300); }
+  .footer__col a { color: rgba(255,255,255,0.66); text-decoration: none; font-size: 0.92rem; transition: color 0.2s; }
+  .footer__col a:hover { color: var(--color-accent); }
 
   .footer__contact li { display: flex; align-items: flex-start; gap: 0.6rem; line-height: 1.5; font-size: 0.92rem; }
-  .footer__contact svg { flex: none; margin-top: 2px; color: var(--color-brand-400); }
-  .footer__cta { margin-top: 1.4rem; padding: 0.7rem 1.3rem; font-size: 0.88rem; }
+  .footer__contact svg { flex: none; margin-top: 2px; color: var(--color-accent); }
+  .footer__cta { margin-top: 1.4rem; padding: 0.7rem 1.4rem; font-size: 0.88rem; }
 
   .footer__bottom {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    padding-top: 1.75rem;
-    font-size: 0.84rem;
-    color: rgba(255, 255, 255, 0.55);
+    display: flex; flex-direction: column; gap: 0.75rem;
+    padding-block: 1.75rem; font-size: 0.84rem; color: rgba(255,255,255,0.5);
   }
   .footer__legal { display: flex; gap: 1.25rem; }
-  .footer__legal a { color: rgba(255, 255, 255, 0.6); text-decoration: none; }
+  .footer__legal a { color: rgba(255,255,255,0.55); text-decoration: none; }
   .footer__legal a:hover { color: #fff; }
 
-  @media (min-width: 640px) {
-    .footer__top { grid-template-columns: 1fr 1fr; }
+  .footer__big {
+    font-weight: 700; letter-spacing: -0.04em; line-height: 0.8;
+    font-size: clamp(5rem, 22vw, 17rem);
+    color: var(--color-accent);
+    text-align: center;
+    margin-bottom: -0.18em;
+    user-select: none;
   }
-  @media (min-width: 1024px) {
+
+  @media (min-width: 640px) { .footer__top { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1000px) {
     .footer__top { grid-template-columns: 1.6fr 1fr 1fr 1.3fr; gap: 3rem; }
     .footer__bottom { flex-direction: row; align-items: center; justify-content: space-between; }
   }

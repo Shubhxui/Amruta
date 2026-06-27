@@ -2,217 +2,169 @@
 import { site } from "../data/site";
 import Icon from "./Icon.astro";
 import { asset } from "../lib/asset";
+
+const heroStats = [
+  { value: "15+", label: "Years of care" },
+  { value: "12K+", label: "Safe deliveries" },
+  { value: "98%", label: "Would recommend" },
+];
+const avatars = ["images/testimonial-1.jpg", "images/testimonial-2.jpg", "images/testimonial-3.jpg"];
 ---
 
 <section id="home" class="hero">
-  <!-- decorative blobs -->
-  <div class="hero__blob hero__blob--1" aria-hidden="true"></div>
-  <div class="hero__blob hero__blob--2" aria-hidden="true"></div>
+  <div class="hero__grid">
+    <div class="hero__left">
+      <div class="hero__content">
+        <span class="eyebrow reveal">Maternity · Gynaecology · Newborn care</span>
 
-  <div class="container-page hero__inner">
-    <div class="hero__copy">
-      <span class="eyebrow reveal"><Icon name="sparkle" class="w-4 h-4" /> Maternity · Gynaecology · Newborn care</span>
+        <h1 class="hero__title h-display reveal" data-delay="60">
+          Caring hands for every new beginning
+        </h1>
 
-      <h1 class="hero__title reveal" data-delay="60">
-        Caring hands for <span class="hero__accent">every new beginning</span>
-      </h1>
-
-      <p class="hero__lead reveal" data-delay="120">
-        At {site.name}, Tathawade, our specialists give you calm, compassionate
-        care through pregnancy, childbirth and beyond — so you can focus on the
-        joy of welcoming your little one.
-      </p>
-
-      <div class="hero__actions reveal" data-delay="180">
-        <a href="#contact" class="btn btn-primary">
-          <Icon name="calendar" class="w-[18px] h-[18px]" /> Book an Appointment
-        </a>
-        <a href="#services" class="btn btn-outline">
-          Explore Services <Icon name="arrowRight" class="w-[18px] h-[18px]" />
-        </a>
-      </div>
-
-      <div class="hero__trust reveal" data-delay="240">
-        <div class="hero__avatars" aria-hidden="true">
-          <span class="ava ava--1"></span>
-          <span class="ava ava--2"></span>
-          <span class="ava ava--3"></span>
-          <span class="ava ava--4"></span>
-        </div>
-        <p class="hero__trust-text">
-          <strong>Trusted by 30,000+ families</strong>
-          across Pune for safe, gentle maternity care.
+        <p class="hero__lead lead reveal" data-delay="120">
+          At {site.name}, Tathawade, our specialists give you calm, compassionate
+          care through pregnancy, childbirth and beyond — so you can focus on the
+          joy of welcoming your little one.
         </p>
+
+        <div class="hero__actions reveal" data-delay="180">
+          <a href="#contact" class="btn btn-primary">
+            <Icon name="calendar" class="w-[18px] h-[18px]" /> Book an Appointment
+          </a>
+          <a href="#services" class="btn btn-white">
+            Our Services <Icon name="arrowRight" class="w-[18px] h-[18px]" />
+          </a>
+        </div>
+
+        <div class="hero__trust reveal" data-delay="240">
+          <div class="hero__avatars" aria-hidden="true">
+            {avatars.map((a) => (
+              <img src={asset(a)} alt="" width="40" height="40" loading="eager" />
+            ))}
+            <span class="hero__avatars-more">30K+</span>
+          </div>
+          <p class="hero__trust-text">
+            Trusted by <strong>30,000+ families</strong> across Pune for safe,
+            gentle maternity care.
+          </p>
+        </div>
+
+        <dl class="hero__stats reveal" data-delay="300">
+          {heroStats.map((s) => (
+            <div class="hero__stat">
+              <dt>{s.value}</dt>
+              <dd>{s.label}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </div>
 
-    <div class="hero__media reveal" data-delay="120">
-      <div class="hero__frame img-fallback">
-        <img
-          src={asset("images/hero.jpg")}
-          alt="A mother gently holding her newborn baby at Amruta Maternity Hospital"
-          width="720"
-          height="860"
-          loading="eager"
-          decoding="async"
-        />
-      </div>
-
-      <!-- floating card: emergency -->
-      <div class="hero__chip hero__chip--top">
-        <span class="hero__chip-icon hero__chip-icon--rose"><Icon name="clock" class="w-5 h-5" /></span>
-        <span>
-          <strong>24 × 7</strong>
-          <small>Emergency & Labour</small>
-        </span>
-      </div>
-
-      <!-- floating card: rating -->
-      <div class="hero__chip hero__chip--bottom">
-        <span class="hero__chip-stars">
-          <Icon name="star" class="w-4 h-4" /><Icon name="star" class="w-4 h-4" />
-          <Icon name="star" class="w-4 h-4" /><Icon name="star" class="w-4 h-4" />
-          <Icon name="star" class="w-4 h-4" />
-        </span>
-        <span><strong>4.9 / 5</strong><small>From happy parents</small></span>
-      </div>
+    <div class="hero__right reveal">
+      <img
+        src={asset("images/hero.jpg")}
+        alt="A mother gently holding her newborn baby at Amruta Maternity Hospital"
+        width="900"
+        height="1120"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
     </div>
   </div>
 </section>
 
 <style>
-  .hero {
-    position: relative;
-    overflow: hidden;
-    background:
-      radial-gradient(120% 90% at 85% 0%, var(--color-peach-100), transparent 55%),
-      radial-gradient(90% 80% at 0% 100%, var(--color-sage-50), transparent 60%),
-      var(--color-cream-100);
-    padding-block: 3.5rem 4rem;
-  }
-  .hero__blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(60px);
-    opacity: 0.5;
-    pointer-events: none;
-  }
-  .hero__blob--1 {
-    width: 420px; height: 420px;
-    background: var(--color-brand-200);
-    top: -120px; right: -80px;
-  }
-  .hero__blob--2 {
-    width: 360px; height: 360px;
-    background: var(--color-sage-200);
-    bottom: -140px; left: -100px;
-  }
-
-  .hero__inner {
-    position: relative;
+  .hero { background: var(--color-cream); overflow: hidden; }
+  .hero__grid {
     display: grid;
-    gap: 3rem;
-    align-items: center;
+    grid-template-columns: 1fr;
   }
 
-  .hero__title {
-    font-size: clamp(2.5rem, 6vw, 4.1rem);
-    margin-top: 1.4rem;
-    text-wrap: balance;
+  .hero__left {
+    display: flex;
+    align-items: center;
+    padding: clamp(2.5rem, 7vw, 3.5rem) 1.25rem clamp(2.5rem, 7vw, 3.5rem);
   }
-  .hero__accent {
-    color: var(--color-brand-600);
-    position: relative;
-    font-style: italic;
-  }
-  .hero__lead {
-    margin-top: 1.4rem;
-    font-size: 1.12rem;
-    line-height: 1.7;
-    color: var(--color-ink-soft);
+  .hero__content {
+    width: 100%;
     max-width: 36rem;
+    margin-inline: auto;
+    text-align: center;
   }
+
+  .hero__title { margin-top: 1.3rem; }
+  .hero__lead { margin-top: 1.3rem; margin-inline: auto; max-width: 34rem; }
+
   .hero__actions {
     margin-top: 2rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.85rem;
+    gap: 0.8rem;
+    justify-content: center;
   }
 
   .hero__trust {
-    margin-top: 2.4rem;
+    margin-top: 2.2rem;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.9rem;
+    justify-content: center;
+    flex-wrap: wrap;
   }
-  .hero__avatars { display: flex; }
-  .ava {
-    width: 42px; height: 42px;
-    border-radius: 50%;
-    border: 2.5px solid var(--color-cream-100);
-    margin-left: -12px;
-    box-shadow: 0 4px 10px -4px rgba(44, 36, 38, 0.3);
-  }
-  .ava--1 { margin-left: 0; background: linear-gradient(135deg, #e9b98a, #cd7b82); }
-  .ava--2 { background: linear-gradient(135deg, #93b19c, #4f7461); }
-  .ava--3 { background: linear-gradient(135deg, #dea0a4, #a4454f); }
-  .ava--4 { background: linear-gradient(135deg, #f0cba8, #e0a36a); }
-  .hero__trust-text {
-    font-size: 0.92rem;
-    color: var(--color-ink-soft);
-    line-height: 1.45;
-    max-width: 18rem;
-  }
-  .hero__trust-text strong { color: var(--color-ink); display: block; }
-
-  /* Media */
-  .hero__media { position: relative; }
-  .hero__frame {
-    position: relative;
-    border-radius: 32% 32% 32% 32% / 6% 6% 6% 6%;
-    border-radius: var(--radius-3xl);
-    overflow: hidden;
-    aspect-ratio: 5 / 6;
-    box-shadow: 0 40px 80px -40px rgba(133, 56, 66, 0.5);
-    border: 8px solid #fff;
-    rotate: 1.2deg;
-  }
-  .hero__frame img {
-    width: 100%; height: 100%;
+  .hero__avatars { display: flex; align-items: center; }
+  .hero__avatars img {
+    width: 40px; height: 40px;
+    border-radius: 999px;
     object-fit: cover;
-    display: block;
+    border: 2.5px solid var(--color-cream);
+    margin-left: -10px;
   }
+  .hero__avatars img:first-child { margin-left: 0; }
+  .hero__avatars-more {
+    margin-left: -10px;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; border-radius: 999px;
+    background: var(--color-ink); color: #fff;
+    font-size: 0.72rem; font-weight: 600;
+    border: 2.5px solid var(--color-cream);
+  }
+  .hero__trust-text { font-size: 0.92rem; color: var(--color-ink-soft); line-height: 1.45; max-width: 16rem; text-align: left; }
+  .hero__trust-text strong { color: var(--color-ink); font-weight: 600; }
 
-  .hero__chip {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
-    background: #fff;
-    padding: 0.7rem 1rem;
-    border-radius: 16px;
-    box-shadow: 0 18px 40px -20px rgba(44, 36, 38, 0.5);
-    rotate: -1.2deg;
+  .hero__stats {
+    margin-top: 2.4rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    padding-top: 1.8rem;
+    border-top: 1px solid var(--color-line);
   }
-  .hero__chip strong { display: block; font-size: 0.98rem; line-height: 1.1; }
-  .hero__chip small { color: var(--color-ink-soft); font-size: 0.72rem; }
-  .hero__chip--top { top: 8%; left: -6%; }
-  .hero__chip--bottom { bottom: 7%; right: -5%; }
-  .hero__chip-icon {
-    display: inline-flex;
-    width: 38px; height: 38px;
-    align-items: center; justify-content: center;
-    border-radius: 12px;
+  .hero__stat dt {
+    font-size: clamp(1.6rem, 5vw, 2.3rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: var(--color-ink);
+    line-height: 1;
   }
-  .hero__chip-icon--rose { background: var(--color-brand-100); color: var(--color-brand-600); }
-  .hero__chip-stars { color: var(--color-peach-500); display: flex; gap: 1px; }
+  .hero__stat dd { margin-top: 0.45rem; font-size: 0.8rem; color: var(--color-ink-soft); }
 
-  @media (min-width: 1024px) {
-    .hero { padding-block: 4.5rem 5.5rem; }
-    .hero__inner { grid-template-columns: 1.05fr 0.95fr; gap: 4rem; }
+  .hero__right { position: relative; min-height: 56vw; max-height: 460px; }
+  .hero__right img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+
+  /* Desktop: split, content aligned to container, image full-bleed right */
+  @media (min-width: 992px) {
+    .hero__grid { grid-template-columns: 1.02fr 0.98fr; min-height: min(86vh, 820px); }
+    .hero__left {
+      justify-content: flex-end;
+      padding: 4rem clamp(2.5rem, 4vw, 4rem) 4rem max(2.5rem, calc((100vw - 78rem) / 2 + 2.5rem));
+    }
+    .hero__content { margin-inline: 0; text-align: left; max-width: 34rem; }
+    .hero__title, .hero__lead { margin-inline: 0; }
+    .hero__actions, .hero__trust { justify-content: flex-start; }
+    .hero__right { min-height: 100%; max-height: none; }
   }
-  @media (max-width: 480px) {
-    .hero__chip--top { left: 2%; }
-    .hero__chip--bottom { right: 2%; }
+  @media (min-width: 1280px) {
+    .hero__left { padding-block: 5rem; }
   }
 </style>

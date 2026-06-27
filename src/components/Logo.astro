@@ -1,8 +1,8 @@
 ---
 /**
  * Amruta Maternity Hospital — logo lockup.
- * A lotus mark (new life · purity · nurturing) + the wordmark.
- * variant="light" is for use on dark backgrounds (footer).
+ * Minimal: a small lotus mark (ink + one lime petal) + bold wordmark.
+ * variant="light" is for dark backgrounds.
  */
 interface Props {
   variant?: "default" | "light";
@@ -12,11 +12,8 @@ interface Props {
 const { variant = "default", href = import.meta.env.BASE_URL, class: className = "" } = Astro.props;
 
 const isLight = variant === "light";
-const word = isLight ? "#ffffff" : "var(--color-ink)";
-const sub = isLight ? "rgba(255,255,255,0.72)" : "var(--color-brand-600)";
-
-// unique gradient ids so multiple logos on one page don't collide
-const uid = Math.random().toString(36).slice(2, 8);
+const ink = isLight ? "#ffffff" : "#0e0e0e";
+const sub = isLight ? "rgba(255,255,255,0.6)" : "#6e6e6e";
 const Tag = href ? "a" : "div";
 ---
 
@@ -25,73 +22,34 @@ const Tag = href ? "a" : "div";
   class={`logo ${className}`}
   aria-label="Amruta Maternity Hospital — home"
 >
-  <svg
-    class="logo__mark"
-    width="46"
-    height="46"
-    viewBox="0 0 48 48"
-    fill="none"
-    aria-hidden="true"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <defs>
-      <linearGradient id={`petal-${uid}`} x1="24" y1="9" x2="24" y2="34" gradientUnits="userSpaceOnUse">
-        <stop stop-color={isLight ? "#ffffff" : "#dea0a4"} />
-        <stop offset="1" stop-color={isLight ? "#ffffff" : "#a4454f"} />
-      </linearGradient>
-      <linearGradient id={`core-${uid}`} x1="24" y1="9" x2="24" y2="34" gradientUnits="userSpaceOnUse">
-        <stop stop-color={isLight ? "#ffffff" : "#93b19c"} />
-        <stop offset="1" stop-color={isLight ? "#ffffff" : "#3e5c4d"} />
-      </linearGradient>
-    </defs>
-    <g style={isLight ? "opacity:.92" : ""}>
-      <!-- outer petals -->
-      <path d="M24 11 C29.5 19, 29.5 27, 24 33 C18.5 27, 18.5 19, 24 11 Z" fill={`url(#petal-${uid})`} transform="rotate(64 24 33)" opacity="0.82" />
-      <path d="M24 11 C29.5 19, 29.5 27, 24 33 C18.5 27, 18.5 19, 24 11 Z" fill={`url(#petal-${uid})`} transform="rotate(-64 24 33)" opacity="0.82" />
-      <!-- inner petals -->
-      <path d="M24 10 C29.5 18, 29.5 26, 24 33 C18.5 26, 18.5 18, 24 10 Z" fill={`url(#petal-${uid})`} transform="rotate(33 24 33)" opacity="0.92" />
-      <path d="M24 10 C29.5 18, 29.5 26, 24 33 C18.5 26, 18.5 18, 24 10 Z" fill={`url(#petal-${uid})`} transform="rotate(-33 24 33)" opacity="0.92" />
-      <!-- center petal (the "heart" / new life) -->
-      <path d="M24 8 C30 17, 30 25, 24 33 C18 25, 18 17, 24 8 Z" fill={`url(#core-${uid})`} />
-      <!-- water line -->
-      <path d="M11 36 C17.5 40.5, 30.5 40.5, 37 36" stroke={isLight ? "rgba(255,255,255,.55)" : "#cd7b82"} stroke-width="1.7" stroke-linecap="round" fill="none" />
-    </g>
+  <svg class="logo__mark" width="34" height="34" viewBox="0 0 48 48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <path d="M24 11 C29.5 19, 29.5 27, 24 33 C18.5 27, 18.5 19, 24 11 Z" fill={ink} opacity="0.55" transform="rotate(64 24 33)" />
+    <path d="M24 11 C29.5 19, 29.5 27, 24 33 C18.5 27, 18.5 19, 24 11 Z" fill={ink} opacity="0.55" transform="rotate(-64 24 33)" />
+    <path d="M24 10 C29.5 18, 29.5 26, 24 33 C18.5 26, 18.5 18, 24 10 Z" fill={ink} opacity="0.82" transform="rotate(33 24 33)" />
+    <path d="M24 10 C29.5 18, 29.5 26, 24 33 C18.5 26, 18.5 18, 24 10 Z" fill={ink} opacity="0.82" transform="rotate(-33 24 33)" />
+    <path d="M24 8 C30 17, 30 25, 24 33 C18 25, 18 17, 24 8 Z" fill="#e4ff60" stroke={ink} stroke-width="1" />
   </svg>
 
   <span class="logo__text">
-    <span class="logo__word" style={`color:${word}`}>Amruta</span>
+    <span class="logo__word" style={`color:${ink}`}>Amruta</span>
     <span class="logo__sub" style={`color:${sub}`}>Maternity&nbsp;Hospital</span>
   </span>
 </Tag>
 
 <style>
-  .logo {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.65rem;
-    text-decoration: none;
-  }
-  .logo__mark {
-    flex: none;
-    filter: drop-shadow(0 6px 12px rgba(133, 56, 66, 0.18));
-  }
-  .logo__text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1;
-  }
+  .logo { display: inline-flex; align-items: center; gap: 0.55rem; text-decoration: none; }
+  .logo__mark { flex: none; }
+  .logo__text { display: flex; flex-direction: column; line-height: 1; }
   .logo__word {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 1.5rem;
-    letter-spacing: -0.015em;
+    font-weight: 700;
+    font-size: 1.45rem;
+    letter-spacing: -0.035em;
   }
   .logo__sub {
-    font-family: var(--font-sans);
-    font-weight: 600;
-    font-size: 0.6rem;
-    letter-spacing: 0.26em;
+    font-weight: 500;
+    font-size: 0.58rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    margin-top: 0.28rem;
+    margin-top: 0.3rem;
   }
 </style>
