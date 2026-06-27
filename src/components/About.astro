@@ -1,0 +1,180 @@
+---
+import { site } from "../data/site";
+import Icon from "./Icon.astro";
+
+const points = [
+  "Senior obstetricians & gynaecologists",
+  "Normal & painless delivery options",
+  "Level-II NICU for newborn care",
+  "Warm, private & hygienic rooms",
+];
+---
+
+<section id="about" class="about">
+  <div class="container-page about__inner">
+    <div class="about__media reveal">
+      <div class="about__frame img-fallback">
+        <img
+          src="/images/about.jpg"
+          alt="Caring doctor consulting with an expecting mother at Amruta Maternity Hospital"
+          width="640"
+          height="720"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <div class="about__badge">
+        <span class="about__badge-num">{new Date().getFullYear() - site.established}+</span>
+        <span class="about__badge-text">Years of trusted<br />maternity care</span>
+      </div>
+      <div class="about__media-deco" aria-hidden="true"></div>
+    </div>
+
+    <div class="about__copy">
+      <span class="eyebrow reveal"><Icon name="heart" class="w-4 h-4" /> About Amruta</span>
+      <h2 class="about__title reveal" data-delay="60">
+        A gentle, modern home for women's & newborn health in Pune
+      </h2>
+      <p class="about__text reveal" data-delay="120">
+        Since {site.established}, {site.name} has been a trusted name in Tathawade
+        for safe deliveries and complete women's healthcare. We blend experienced
+        specialists, modern facilities and genuinely warm care — so every mother
+        feels heard, safe and supported.
+      </p>
+      <p class="about__text reveal" data-delay="160">
+        From your first scan to your baby's first cry and beyond, our team walks
+        beside you with patience, clarity and compassion at every step.
+      </p>
+
+      <ul class="about__list reveal" data-delay="200">
+        {points.map((p) => (
+          <li class="about__list-item">
+            <span class="about__check"><Icon name="check" class="w-4 h-4" strokeWidth={2.2} /></span>
+            {p}
+          </li>
+        ))}
+      </ul>
+
+      <div class="about__cta reveal" data-delay="240">
+        <a href="#contact" class="btn btn-primary">Meet our team</a>
+        <a href={site.contact.phoneHref} class="about__call">
+          <span class="about__call-icon"><Icon name="phone" class="w-5 h-5" /></span>
+          <span>
+            <small>Talk to us today</small>
+            <strong>{site.contact.phone}</strong>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about { padding-block: 5rem; }
+  .about__inner {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .about__media { position: relative; }
+  .about__frame {
+    position: relative;
+    z-index: 2;
+    border-radius: var(--radius-3xl);
+    overflow: hidden;
+    aspect-ratio: 4 / 4.4;
+    border: 8px solid #fff;
+    box-shadow: 0 40px 80px -44px rgba(133, 56, 66, 0.5);
+  }
+  .about__frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .about__media-deco {
+    position: absolute;
+    inset: auto -18px -18px auto;
+    width: 70%;
+    height: 70%;
+    border-radius: var(--radius-3xl);
+    background:
+      radial-gradient(circle at 20% 20%, var(--color-sage-200), transparent 60%),
+      var(--color-peach-200);
+    z-index: 1;
+  }
+  .about__badge {
+    position: absolute;
+    z-index: 3;
+    left: -14px;
+    bottom: 28px;
+    background: var(--color-brand-500);
+    color: #fff;
+    padding: 1.1rem 1.3rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    box-shadow: 0 22px 44px -20px rgba(133, 56, 66, 0.7);
+  }
+  .about__badge-num {
+    font-family: var(--font-display);
+    font-size: 2.3rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .about__badge-text { font-size: 0.8rem; line-height: 1.25; opacity: 0.92; }
+
+  .about__title {
+    font-size: clamp(2rem, 4vw, 2.85rem);
+    margin-top: 1.2rem;
+  }
+  .about__text {
+    margin-top: 1.2rem;
+    color: var(--color-ink-soft);
+    line-height: 1.75;
+    max-width: 38rem;
+  }
+  .about__list {
+    margin-top: 1.75rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+  .about__list-item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+  .about__check {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--color-sage-100);
+    color: var(--color-sage-600);
+  }
+
+  .about__cta {
+    margin-top: 2.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .about__call { display: inline-flex; align-items: center; gap: 0.7rem; text-decoration: none; color: inherit; }
+  .about__call-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 46px; height: 46px; border-radius: 50%;
+    background: var(--color-cream-200); color: var(--color-brand-600);
+  }
+  .about__call small { display: block; font-size: 0.78rem; color: var(--color-ink-soft); }
+  .about__call strong { font-size: 1.05rem; }
+
+  @media (min-width: 768px) {
+    .about__list { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 1024px) {
+    .about__inner { grid-template-columns: 0.92fr 1.08fr; gap: 4.5rem; }
+  }
+</style>

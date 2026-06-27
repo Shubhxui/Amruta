@@ -1,0 +1,107 @@
+---
+import { site } from "../data/site";
+import Icon from "./Icon.astro";
+---
+
+<section id="doctors" class="doctors">
+  <div class="container-page">
+    <div class="section-head reveal">
+      <span class="eyebrow is-centered"><Icon name="sparkle" class="w-4 h-4" /> Meet our specialists</span>
+      <h2 class="section-title">The caring team behind every safe delivery</h2>
+      <p class="section-sub">
+        Experienced, friendly and always approachable — our doctors are here to
+        guide you with expertise and warmth.
+      </p>
+    </div>
+
+    <div class="doctors__grid">
+      {site.doctors.map((doc, i) => (
+        <article class="doctors__card reveal" data-delay={i * 70}>
+          <div class="doctors__photo img-fallback">
+            <img
+              src={doc.image}
+              alt={`${doc.name}, ${doc.role} at Amruta Maternity Hospital`}
+              width="360"
+              height="420"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="doctors__socials">
+              <a href="#contact" aria-label={`Book with ${doc.name}`}><Icon name="calendar" class="w-[18px] h-[18px]" /></a>
+              <a href={site.contact.phoneHref} aria-label={`Call about ${doc.name}`}><Icon name="phone" class="w-[18px] h-[18px]" /></a>
+            </div>
+          </div>
+          <div class="doctors__body">
+            <h3 class="doctors__name">{doc.name}</h3>
+            <p class="doctors__role">{doc.role}</p>
+            <p class="doctors__detail">{doc.detail}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .doctors {
+    padding-block: 5rem;
+    background:
+      radial-gradient(60% 50% at 50% 100%, var(--color-peach-100), transparent 70%),
+      var(--color-cream-100);
+  }
+
+  .doctors__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+  .doctors__card {
+    background: #fff;
+    border-radius: var(--radius-2xl);
+    border: 1px solid var(--color-cream-300);
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .doctors__card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 30px 56px -30px rgba(133, 56, 66, 0.4);
+  }
+  .doctors__photo {
+    position: relative;
+    aspect-ratio: 4 / 4.4;
+    overflow: hidden;
+  }
+  .doctors__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .doctors__socials {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.25s, transform 0.25s;
+  }
+  .doctors__card:hover .doctors__socials { opacity: 1; transform: none; }
+  .doctors__socials a {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 38px; height: 38px; border-radius: 50%;
+    background: #fff; color: var(--color-brand-600);
+    box-shadow: 0 8px 18px -8px rgba(44, 36, 38, 0.5);
+    transition: background 0.2s, color 0.2s;
+  }
+  .doctors__socials a:hover { background: var(--color-brand-500); color: #fff; }
+
+  .doctors__body { padding: 1.4rem 1.4rem 1.6rem; }
+  .doctors__name { font-size: 1.18rem; }
+  .doctors__role { margin-top: 0.3rem; color: var(--color-brand-600); font-weight: 600; font-size: 0.9rem; }
+  .doctors__detail { margin-top: 0.45rem; color: var(--color-ink-soft); font-size: 0.85rem; }
+
+  @media (min-width: 560px) {
+    .doctors__grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 1024px) {
+    .doctors__grid { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>

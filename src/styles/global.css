@@ -1,0 +1,236 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Amruta Maternity Hospital — Design System
+   Tailwind v4 theme tokens. Brand = dusty rose, secondary = deep sage,
+   accent = warm peach, surfaces = warm cream, ink = plum-charcoal.
+   ========================================================================== */
+@theme {
+  /* Fonts */
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+
+  /* Brand — dusty rose (warmth, maternity care) */
+  --color-brand-50: #fbf1f1;
+  --color-brand-100: #f6e0e1;
+  --color-brand-200: #ecc4c6;
+  --color-brand-300: #dea0a4;
+  --color-brand-400: #cd7b82;
+  --color-brand-500: #bf5c66;
+  --color-brand-600: #a4454f;
+  --color-brand-700: #853842;
+  --color-brand-800: #5f2a31;
+  --color-brand-900: #401e23;
+
+  /* Sage — deep green (health, calm, trust) */
+  --color-sage-50: #f1f5f2;
+  --color-sage-100: #dde8e0;
+  --color-sage-200: #bcd0c1;
+  --color-sage-300: #93b19c;
+  --color-sage-400: #6c9079;
+  --color-sage-500: #4f7461;
+  --color-sage-600: #3e5c4d;
+  --color-sage-700: #33493f;
+  --color-sage-800: #243530;
+  --color-sage-900: #18221f;
+
+  /* Peach — warm accent / highlight */
+  --color-peach-100: #fbeede;
+  --color-peach-200: #f6dcc1;
+  --color-peach-300: #f0cba8;
+  --color-peach-400: #e9b98a;
+  --color-peach-500: #e0a36a;
+
+  /* Cream — surfaces */
+  --color-cream-50: #fdfbf8;
+  --color-cream-100: #fbf7f3;
+  --color-cream-200: #f4ece4;
+  --color-cream-300: #ece0d4;
+
+  /* Ink — text */
+  --color-ink: #2c2426;
+  --color-ink-soft: #6b5f61;
+  --color-ink-faint: #9a8f90;
+
+  /* Radii */
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.75rem;
+  --radius-3xl: 2.25rem;
+}
+
+/* ---------------------------------------------------------------- Base */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Offset anchored sections so titles clear the sticky header */
+  :where(section[id]) {
+    scroll-margin-top: 124px;
+  }
+
+  body {
+    background-color: var(--color-cream-100);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+  }
+
+  ::selection {
+    background-color: var(--color-brand-200);
+    color: var(--color-brand-900);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+/* ----------------------------------------------------------- Components */
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 80rem; /* 1280px */
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 1024px) {
+    .container-page { padding-inline: 2.5rem; }
+  }
+
+  /* Section eyebrow label */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-brand-600);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 1.75rem;
+    height: 1px;
+    background-color: var(--color-brand-400);
+  }
+  .eyebrow.is-centered::after {
+    content: "";
+    width: 1.75rem;
+    height: 1px;
+    background-color: var(--color-brand-400);
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1;
+    padding: 0.95rem 1.6rem;
+    border-radius: 999px;
+    transition: transform 0.18s ease, background-color 0.18s ease,
+      box-shadow 0.18s ease, color 0.18s ease;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn:hover { transform: translateY(-2px); }
+
+  .btn-primary {
+    background-color: var(--color-brand-500);
+    color: #fff;
+    box-shadow: 0 10px 24px -10px color-mix(in srgb, var(--color-brand-600) 70%, transparent);
+  }
+  .btn-primary:hover { background-color: var(--color-brand-600); }
+
+  .btn-secondary {
+    background-color: var(--color-sage-500);
+    color: #fff;
+    box-shadow: 0 10px 24px -10px color-mix(in srgb, var(--color-sage-700) 70%, transparent);
+  }
+  .btn-secondary:hover { background-color: var(--color-sage-600); }
+
+  .btn-outline {
+    background-color: transparent;
+    color: var(--color-ink);
+    border: 1.5px solid color-mix(in srgb, var(--color-ink) 18%, transparent);
+  }
+  .btn-outline:hover {
+    border-color: var(--color-brand-500);
+    color: var(--color-brand-600);
+  }
+
+  .btn-ghost {
+    background-color: #fff;
+    color: var(--color-ink);
+    box-shadow: 0 8px 20px -12px rgba(44, 36, 38, 0.45);
+  }
+  .btn-ghost:hover { color: var(--color-brand-600); }
+
+  /* Card */
+  .card {
+    background-color: #fff;
+    border-radius: var(--radius-2xl);
+    border: 1px solid var(--color-cream-300);
+    box-shadow: 0 1px 2px rgba(44, 36, 38, 0.04);
+    transition: transform 0.25s ease, box-shadow 0.25s ease,
+      border-color 0.25s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 48px -28px rgba(133, 56, 66, 0.35);
+    border-color: var(--color-brand-200);
+  }
+
+  /* Soft image placeholder gradient (used behind <img>) */
+  .img-fallback {
+    background-image: linear-gradient(
+      135deg,
+      var(--color-brand-100),
+      var(--color-peach-200) 45%,
+      var(--color-sage-100)
+    );
+  }
+}
+
+/* ----------------------------------------------------------- Utilities */
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+
+  /* Reveal-on-scroll animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1 !important; transform: none !important; transition: none; }
+  .btn:hover, .card-hover:hover { transform: none; }
+}

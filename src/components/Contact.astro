@@ -1,0 +1,243 @@
+---
+import { site } from "../data/site";
+import Icon from "./Icon.astro";
+
+const waNumber = site.contact.whatsapp.replace(/[^0-9]/g, "");
+const addr = site.contact.address;
+const mapEmbed = `https://www.google.com/maps?q=${encodeURIComponent(site.contact.mapQuery)}&output=embed`;
+---
+
+<section id="contact" class="contact">
+  <div class="contact__deco" aria-hidden="true"></div>
+  <div class="container-page contact__inner">
+    <div class="contact__head reveal">
+      <span class="eyebrow is-centered contact__eyebrow"><Icon name="calendar" class="w-4 h-4" /> Book an appointment</span>
+      <h2 class="contact__title">Let's plan the safe, gentle care you deserve</h2>
+      <p class="contact__sub">
+        Share a few details and our team will call you back to confirm your visit.
+        For anything urgent, please call us directly — we're here 24×7.
+      </p>
+    </div>
+
+    <div class="contact__grid">
+      <!-- Form -->
+      <form id="apptForm" class="contact__form reveal" data-wa={waNumber}>
+        <div class="field">
+          <label for="f-name">Full name</label>
+          <input id="f-name" name="name" type="text" required placeholder="Your name" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="f-phone">Phone number</label>
+            <input id="f-phone" name="phone" type="tel" required placeholder="+91 ..." />
+          </div>
+          <div class="field">
+            <label for="f-service">Service</label>
+            <select id="f-service" name="service">
+              {site.services.map((s) => <option value={s.title}>{s.title}</option>)}
+              <option value="General enquiry">General enquiry</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-date">Preferred date</label>
+          <input id="f-date" name="date" type="date" />
+        </div>
+        <div class="field">
+          <label for="f-msg">Message (optional)</label>
+          <textarea id="f-msg" name="message" rows="3" placeholder="Tell us briefly how we can help"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary contact__submit">
+          <Icon name="chat" class="w-[18px] h-[18px]" /> Request appointment
+        </button>
+        <p class="contact__formnote" id="apptNote">
+          You'll be taken to WhatsApp to send your request to our care team.
+        </p>
+      </form>
+
+      <!-- Info + map -->
+      <div class="contact__info reveal" data-delay="120">
+        <ul class="contact__details">
+          <li>
+            <span class="contact__icon"><Icon name="location" class="w-5 h-5" /></span>
+            <div>
+              <strong>Visit us</strong>
+              <p>{addr.line1}, {addr.line2}, {addr.city}, {addr.state} {addr.pin}</p>
+            </div>
+          </li>
+          <li>
+            <a href={site.contact.phoneHref}>
+              <span class="contact__icon"><Icon name="phone" class="w-5 h-5" /></span>
+              <div><strong>Call / WhatsApp</strong><p>{site.contact.phone}</p></div>
+            </a>
+          </li>
+          <li>
+            <a href={`mailto:${site.contact.email}`}>
+              <span class="contact__icon"><Icon name="mail" class="w-5 h-5" /></span>
+              <div><strong>Email us</strong><p>{site.contact.email}</p></div>
+            </a>
+          </li>
+          <li>
+            <span class="contact__icon"><Icon name="clock" class="w-5 h-5" /></span>
+            <div>
+              <strong>Timings</strong>
+              {site.contact.hours.map((h) => <p>{h.day} · {h.time}</p>)}
+            </div>
+          </li>
+        </ul>
+
+        <div class="contact__map">
+          <iframe
+            title="Map to Amruta Maternity Hospital"
+            src={mapEmbed}
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    position: relative;
+    overflow: hidden;
+    padding-block: 5rem;
+    background:
+      radial-gradient(80% 90% at 85% 0%, var(--color-sage-700), transparent 55%),
+      linear-gradient(160deg, var(--color-sage-800), var(--color-sage-900));
+    color: #fff;
+  }
+  .contact__deco {
+    position: absolute;
+    width: 460px; height: 460px;
+    border-radius: 50%;
+    background: var(--color-brand-500);
+    opacity: 0.16;
+    filter: blur(70px);
+    top: -120px; left: -100px;
+  }
+  .contact__inner { position: relative; }
+
+  .contact__head { max-width: 42rem; margin: 0 auto 3rem; text-align: center; }
+  .contact__eyebrow { color: var(--color-peach-300); justify-content: center; }
+  .contact__eyebrow::before, .contact__eyebrow::after { background: var(--color-peach-400); }
+  .contact__title { color: #fff; font-size: clamp(2rem, 4.4vw, 3rem); margin-top: 1rem; }
+  .contact__sub { margin-top: 1rem; color: rgba(255, 255, 255, 0.78); line-height: 1.7; }
+
+  .contact__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  /* Form card */
+  .contact__form {
+    background: #fff;
+    color: var(--color-ink);
+    border-radius: var(--radius-2xl);
+    padding: 1.9rem;
+    box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    gap: 1.05rem;
+  }
+  .field { display: flex; flex-direction: column; gap: 0.4rem; }
+  .field-row { display: grid; grid-template-columns: 1fr; gap: 1.05rem; }
+  .field label { font-size: 0.82rem; font-weight: 600; color: var(--color-ink); }
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    font: inherit;
+    font-size: 0.95rem;
+    color: var(--color-ink);
+    background: var(--color-cream-50);
+    border: 1.5px solid var(--color-cream-300);
+    border-radius: 14px;
+    padding: 0.8rem 0.95rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .field textarea { resize: vertical; }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--color-brand-400);
+    box-shadow: 0 0 0 3px var(--color-brand-100);
+  }
+  .contact__submit { width: 100%; margin-top: 0.3rem; }
+  .contact__formnote { font-size: 0.78rem; color: var(--color-ink-soft); text-align: center; }
+
+  /* Info column */
+  .contact__details { display: grid; gap: 0.5rem; }
+  .contact__details li > *,
+  .contact__details li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+  }
+  .contact__details a { color: inherit; text-decoration: none; }
+  .contact__details li {
+    padding: 1rem 1.1rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl);
+    transition: background 0.2s;
+  }
+  .contact__details li:hover { background: rgba(255, 255, 255, 0.1); }
+  .contact__icon {
+    flex: none;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-peach-300);
+  }
+  .contact__details strong { display: block; font-size: 0.95rem; }
+  .contact__details p { color: rgba(255, 255, 255, 0.72); font-size: 0.88rem; line-height: 1.45; }
+
+  .contact__map {
+    margin-top: 1.25rem;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    height: 240px;
+  }
+  .contact__map iframe { width: 100%; height: 100%; border: 0; display: block; filter: saturate(0.9); }
+
+  @media (min-width: 560px) {
+    .field-row { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 1024px) {
+    .contact__grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  }
+</style>
+
+<script>
+  const form = document.getElementById("apptForm") as HTMLFormElement | null;
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const wa = form.dataset.wa || "";
+    const lines = [
+      "Hello Amruta Maternity Hospital, I'd like to book an appointment.",
+      "",
+      `Name: ${data.get("name") || "-"}`,
+      `Phone: ${data.get("phone") || "-"}`,
+      `Service: ${data.get("service") || "-"}`,
+      `Preferred date: ${data.get("date") || "-"}`,
+    ];
+    const msg = (data.get("message") || "").toString().trim();
+    if (msg) lines.push(`Message: ${msg}`);
+    const url = `https://wa.me/${wa}?text=${encodeURIComponent(lines.join("\n"))}`;
+    window.open(url, "_blank", "noopener");
+    const note = document.getElementById("apptNote");
+    if (note) {
+      note.textContent = "Thank you! Opening WhatsApp so you can send your request…";
+      (note as HTMLElement).style.color = "var(--color-sage-600)";
+    }
+  });
+</script>

@@ -1,0 +1,121 @@
+---
+import { site } from "../data/site";
+import Icon from "./Icon.astro";
+---
+
+<section id="why" class="why">
+  <div class="container-page why__inner">
+    <div class="why__intro">
+      <span class="eyebrow reveal"><Icon name="shield" class="w-4 h-4" /> Why families choose us</span>
+      <h2 class="why__title reveal" data-delay="60">
+        Expert care that feels personal, never rushed
+      </h2>
+      <p class="why__text reveal" data-delay="120">
+        Choosing where to welcome your baby is a big decision. Here's why thousands
+        of Pune families trust Amruta with the moments that matter most.
+      </p>
+
+      <div class="why__highlight reveal" data-delay="160">
+        <span class="why__highlight-icon"><Icon name="chat" class="w-6 h-6" /></span>
+        <div>
+          <strong>Have a question?</strong>
+          <p>Our care team replies on WhatsApp, every day.</p>
+        </div>
+        <a href={site.contact.phoneHref} class="btn btn-secondary why__highlight-btn">Chat now</a>
+      </div>
+    </div>
+
+    <div class="why__features">
+      {site.whyUs.map((f, i) => (
+        <article class="why__feature reveal" data-delay={i * 80}>
+          <span class="why__feature-icon"><Icon name={f.icon} class="w-6 h-6" /></span>
+          <div>
+            <h3 class="why__feature-title">{f.title}</h3>
+            <p class="why__feature-text">{f.text}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .why { padding-block: 5rem; }
+  .why__inner {
+    display: grid;
+    gap: 3rem;
+    align-items: start;
+  }
+  .why__title {
+    font-size: clamp(2rem, 4vw, 2.85rem);
+    margin-top: 1.1rem;
+  }
+  .why__text {
+    margin-top: 1.1rem;
+    color: var(--color-ink-soft);
+    line-height: 1.75;
+    max-width: 32rem;
+  }
+  .why__highlight {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    background: var(--color-sage-50);
+    border: 1px solid var(--color-sage-100);
+    border-radius: var(--radius-xl);
+    padding: 1.1rem 1.25rem;
+  }
+  .why__highlight-icon {
+    flex: none;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 46px; height: 46px; border-radius: 14px;
+    background: #fff; color: var(--color-sage-600);
+  }
+  .why__highlight strong { font-size: 0.98rem; }
+  .why__highlight p { font-size: 0.85rem; color: var(--color-ink-soft); }
+  .why__highlight-btn { margin-left: auto; padding: 0.7rem 1.2rem; font-size: 0.85rem; }
+
+  .why__features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .why__feature {
+    display: flex;
+    gap: 1.1rem;
+    padding: 1.5rem;
+    background: #fff;
+    border: 1px solid var(--color-cream-300);
+    border-radius: var(--radius-xl);
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  }
+  .why__feature:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 44px -28px rgba(133, 56, 66, 0.3);
+    border-color: var(--color-brand-200);
+  }
+  .why__feature-icon {
+    flex: none;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 52px; height: 52px; border-radius: 16px;
+    background: var(--color-brand-50);
+    color: var(--color-brand-600);
+  }
+  .why__feature-title { font-size: 1.12rem; }
+  .why__feature-text {
+    margin-top: 0.35rem;
+    color: var(--color-ink-soft);
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  @media (min-width: 640px) {
+    .why__features { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 1024px) {
+    .why__inner { grid-template-columns: 0.9fr 1.1fr; gap: 4rem; }
+    .why__features { gap: 1.25rem; }
+  }
+</style>

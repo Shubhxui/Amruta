@@ -1,0 +1,217 @@
+---
+import { site } from "../data/site";
+import Icon from "./Icon.astro";
+---
+
+<section id="home" class="hero">
+  <!-- decorative blobs -->
+  <div class="hero__blob hero__blob--1" aria-hidden="true"></div>
+  <div class="hero__blob hero__blob--2" aria-hidden="true"></div>
+
+  <div class="container-page hero__inner">
+    <div class="hero__copy">
+      <span class="eyebrow reveal"><Icon name="sparkle" class="w-4 h-4" /> Maternity · Gynaecology · Newborn care</span>
+
+      <h1 class="hero__title reveal" data-delay="60">
+        Caring hands for <span class="hero__accent">every new beginning</span>
+      </h1>
+
+      <p class="hero__lead reveal" data-delay="120">
+        At {site.name}, Tathawade, our specialists give you calm, compassionate
+        care through pregnancy, childbirth and beyond — so you can focus on the
+        joy of welcoming your little one.
+      </p>
+
+      <div class="hero__actions reveal" data-delay="180">
+        <a href="#contact" class="btn btn-primary">
+          <Icon name="calendar" class="w-[18px] h-[18px]" /> Book an Appointment
+        </a>
+        <a href="#services" class="btn btn-outline">
+          Explore Services <Icon name="arrowRight" class="w-[18px] h-[18px]" />
+        </a>
+      </div>
+
+      <div class="hero__trust reveal" data-delay="240">
+        <div class="hero__avatars" aria-hidden="true">
+          <span class="ava ava--1"></span>
+          <span class="ava ava--2"></span>
+          <span class="ava ava--3"></span>
+          <span class="ava ava--4"></span>
+        </div>
+        <p class="hero__trust-text">
+          <strong>Trusted by 30,000+ families</strong>
+          across Pune for safe, gentle maternity care.
+        </p>
+      </div>
+    </div>
+
+    <div class="hero__media reveal" data-delay="120">
+      <div class="hero__frame img-fallback">
+        <img
+          src="/images/hero.jpg"
+          alt="A mother gently holding her newborn baby at Amruta Maternity Hospital"
+          width="720"
+          height="860"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+
+      <!-- floating card: emergency -->
+      <div class="hero__chip hero__chip--top">
+        <span class="hero__chip-icon hero__chip-icon--rose"><Icon name="clock" class="w-5 h-5" /></span>
+        <span>
+          <strong>24 × 7</strong>
+          <small>Emergency & Labour</small>
+        </span>
+      </div>
+
+      <!-- floating card: rating -->
+      <div class="hero__chip hero__chip--bottom">
+        <span class="hero__chip-stars">
+          <Icon name="star" class="w-4 h-4" /><Icon name="star" class="w-4 h-4" />
+          <Icon name="star" class="w-4 h-4" /><Icon name="star" class="w-4 h-4" />
+          <Icon name="star" class="w-4 h-4" />
+        </span>
+        <span><strong>4.9 / 5</strong><small>From happy parents</small></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(120% 90% at 85% 0%, var(--color-peach-100), transparent 55%),
+      radial-gradient(90% 80% at 0% 100%, var(--color-sage-50), transparent 60%),
+      var(--color-cream-100);
+    padding-block: 3.5rem 4rem;
+  }
+  .hero__blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .hero__blob--1 {
+    width: 420px; height: 420px;
+    background: var(--color-brand-200);
+    top: -120px; right: -80px;
+  }
+  .hero__blob--2 {
+    width: 360px; height: 360px;
+    background: var(--color-sage-200);
+    bottom: -140px; left: -100px;
+  }
+
+  .hero__inner {
+    position: relative;
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .hero__title {
+    font-size: clamp(2.5rem, 6vw, 4.1rem);
+    margin-top: 1.4rem;
+    text-wrap: balance;
+  }
+  .hero__accent {
+    color: var(--color-brand-600);
+    position: relative;
+    font-style: italic;
+  }
+  .hero__lead {
+    margin-top: 1.4rem;
+    font-size: 1.12rem;
+    line-height: 1.7;
+    color: var(--color-ink-soft);
+    max-width: 36rem;
+  }
+  .hero__actions {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+  }
+
+  .hero__trust {
+    margin-top: 2.4rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .hero__avatars { display: flex; }
+  .ava {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: 2.5px solid var(--color-cream-100);
+    margin-left: -12px;
+    box-shadow: 0 4px 10px -4px rgba(44, 36, 38, 0.3);
+  }
+  .ava--1 { margin-left: 0; background: linear-gradient(135deg, #e9b98a, #cd7b82); }
+  .ava--2 { background: linear-gradient(135deg, #93b19c, #4f7461); }
+  .ava--3 { background: linear-gradient(135deg, #dea0a4, #a4454f); }
+  .ava--4 { background: linear-gradient(135deg, #f0cba8, #e0a36a); }
+  .hero__trust-text {
+    font-size: 0.92rem;
+    color: var(--color-ink-soft);
+    line-height: 1.45;
+    max-width: 18rem;
+  }
+  .hero__trust-text strong { color: var(--color-ink); display: block; }
+
+  /* Media */
+  .hero__media { position: relative; }
+  .hero__frame {
+    position: relative;
+    border-radius: 32% 32% 32% 32% / 6% 6% 6% 6%;
+    border-radius: var(--radius-3xl);
+    overflow: hidden;
+    aspect-ratio: 5 / 6;
+    box-shadow: 0 40px 80px -40px rgba(133, 56, 66, 0.5);
+    border: 8px solid #fff;
+    rotate: 1.2deg;
+  }
+  .hero__frame img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hero__chip {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    background: #fff;
+    padding: 0.7rem 1rem;
+    border-radius: 16px;
+    box-shadow: 0 18px 40px -20px rgba(44, 36, 38, 0.5);
+    rotate: -1.2deg;
+  }
+  .hero__chip strong { display: block; font-size: 0.98rem; line-height: 1.1; }
+  .hero__chip small { color: var(--color-ink-soft); font-size: 0.72rem; }
+  .hero__chip--top { top: 8%; left: -6%; }
+  .hero__chip--bottom { bottom: 7%; right: -5%; }
+  .hero__chip-icon {
+    display: inline-flex;
+    width: 38px; height: 38px;
+    align-items: center; justify-content: center;
+    border-radius: 12px;
+  }
+  .hero__chip-icon--rose { background: var(--color-brand-100); color: var(--color-brand-600); }
+  .hero__chip-stars { color: var(--color-peach-500); display: flex; gap: 1px; }
+
+  @media (min-width: 1024px) {
+    .hero { padding-block: 4.5rem 5.5rem; }
+    .hero__inner { grid-template-columns: 1.05fr 0.95fr; gap: 4rem; }
+  }
+  @media (max-width: 480px) {
+    .hero__chip--top { left: 2%; }
+    .hero__chip--bottom { right: 2%; }
+  }
+</style>

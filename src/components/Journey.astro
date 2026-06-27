@@ -1,0 +1,108 @@
+---
+import { site } from "../data/site";
+import Icon from "./Icon.astro";
+---
+
+<section id="journey" class="journey">
+  <div class="container-page">
+    <div class="section-head reveal">
+      <span class="eyebrow is-centered"><Icon name="heart" class="w-4 h-4" /> Your journey with us</span>
+      <h2 class="section-title">Supported at every step, start to cradle</h2>
+      <p class="section-sub">
+        We make every stage of your pregnancy feel clear and calm — here's how we
+        care for you and your baby from the very beginning.
+      </p>
+    </div>
+
+    <div class="journey__grid">
+      <div class="journey__line" aria-hidden="true"></div>
+      {site.journey.map((stage, i) => (
+        <article class="journey__step reveal" data-delay={i * 90}>
+          <div class="journey__node">
+            <span class="journey__num">{stage.step}</span>
+          </div>
+          <div class="journey__card">
+            <h3 class="journey__step-title">{stage.title}</h3>
+            <p class="journey__step-text">{stage.text}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .journey {
+    padding-block: 5rem;
+    background:
+      linear-gradient(180deg, var(--color-sage-50), var(--color-cream-100));
+  }
+
+  .journey__grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .journey__line { display: none; }
+
+  .journey__step {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+  .journey__node {
+    flex: none;
+    position: relative;
+    z-index: 2;
+  }
+  .journey__num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px; height: 64px;
+    border-radius: 20px;
+    background: #fff;
+    border: 1.5px solid var(--color-brand-200);
+    color: var(--color-brand-600);
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    box-shadow: 0 14px 28px -16px rgba(133, 56, 66, 0.5);
+  }
+  .journey__step-title { font-size: 1.2rem; }
+  .journey__step-text {
+    margin-top: 0.5rem;
+    color: var(--color-ink-soft);
+    line-height: 1.65;
+    font-size: 0.95rem;
+  }
+
+  @media (min-width: 900px) {
+    .journey__grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .journey__line {
+      display: block;
+      position: absolute;
+      top: 32px;
+      left: 8%;
+      right: 8%;
+      height: 2px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--color-brand-300) 0 8px,
+        transparent 8px 16px
+      );
+    }
+    .journey__step {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.25rem;
+    }
+    .journey__step-text { max-width: 16rem; margin-inline: auto; }
+  }
+</style>
