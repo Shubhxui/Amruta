@@ -1,6 +1,7 @@
 ---
 import { site } from "../data/site";
 import Icon from "./Icon.astro";
+import { asset } from "../lib/asset";
 ---
 
 <section id="doctors" class="doctors">
@@ -19,7 +20,7 @@ import Icon from "./Icon.astro";
         <article class="doctors__card reveal" data-delay={i * 70}>
           <div class="doctors__photo img-fallback">
             <img
-              src={doc.image}
+              src={asset(doc.image)}
               alt={`${doc.name}, ${doc.role} at Amruta Maternity Hospital`}
               width="360"
               height="420"

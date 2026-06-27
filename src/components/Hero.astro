@@ -1,6 +1,7 @@
 ---
 import { site } from "../data/site";
 import Icon from "./Icon.astro";
+import { asset } from "../lib/asset";
 ---
 
 <section id="home" class="hero">
@@ -48,7 +49,7 @@ import Icon from "./Icon.astro";
     <div class="hero__media reveal" data-delay="120">
       <div class="hero__frame img-fallback">
         <img
-          src="/images/hero.jpg"
+          src={asset("images/hero.jpg")}
           alt="A mother gently holding her newborn baby at Amruta Maternity Hospital"
           width="720"
           height="860"

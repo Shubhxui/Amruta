@@ -1,6 +1,7 @@
 ---
 import { site } from "../data/site";
 import Icon from "./Icon.astro";
+import { asset } from "../lib/asset";
 
 const points = [
   "Senior obstetricians & gynaecologists",
@@ -15,7 +16,7 @@ const points = [
     <div class="about__media reveal">
       <div class="about__frame img-fallback">
         <img
-          src="/images/about.jpg"
+          src={asset("images/about.jpg")}
           alt="Caring doctor consulting with an expecting mother at Amruta Maternity Hospital"
           width="640"
           height="720"
